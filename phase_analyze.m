@@ -1,17 +1,17 @@
-phase_4 = analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\2023_05_16_Phantoms_Suyash 2\2023_05_16_Phantoms_Suyash\Phantom1_Flat\3322_Phantom1_B0_TE1\2\3322_',...
-    'C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\2023_05_16_Phantoms_Suyash 2\2023_05_16_Phantoms_Suyash\Phantom1_Flat\3322_Phantom1_B0_TE1\3\3322_',1:64);
+phase_4 = analyze('D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\3225_B0_map_TE1\2\3225_',...
+    'D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\3225_B0_map_TE1\3\3225_',1:64);
 
-phase_5 = analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\2023_05_16_Phantoms_Suyash 2\2023_05_16_Phantoms_Suyash\Phantom1_Flat\3323_Phantom1_B0_TE2\2\3323_',...
-    'C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\2023_05_16_Phantoms_Suyash 2\2023_05_16_Phantoms_Suyash\Phantom1_Flat\3323_Phantom1_B0_TE2\3\3323_',1:64);
+phase_5 = analyze('D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\3226_B0_map_TE2\2\3226_',...
+    'D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\3226_B0_map_TE2\3\3226_',1:64);
 
-phase_6 = analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\2023_05_16_Phantoms_Suyash 2\2023_05_16_Phantoms_Suyash\Phantom1_Flat\3324_Phantom1_B0_TE3\2\3324_',...
-    'C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\2023_05_16_Phantoms_Suyash 2\2023_05_16_Phantoms_Suyash\Phantom1_Flat\3324_Phantom1_B0_TE3\3\3324_',1:64);
+phase_6 = analyze('D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\3227_B0_map_TE3\2\3227_',...
+    'D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\3227_B0_map_TE3\3\3227_',1:64);
 
 map = phase_5-phase_4;
-map_img = reshape(map(75,:,:),[64 64]);
+map_img = reshape(map(69,:,:),[64 64]);
 
 other_map = phase_6-phase_5;
-other_map_img = reshape(map(75,:,:),[64 64]);
+other_map_img = reshape(map(69,:,:),[64 64]);
 
 for i=1:64
     fname = ['C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\2023_05_16_Phantoms_Suyash 2\2023_05_16_Phantoms_Suyash\Phantom1_Flat\3322_Phantom1_B0_TE1\1\3322_' sprintf('%05d',i) '.dcm'];

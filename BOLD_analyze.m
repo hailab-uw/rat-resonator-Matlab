@@ -1,5 +1,5 @@
-[baseline_rms,baseline_mean] = baseline_analyze('D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\Suyash_05_10_2023_Rat_Surgery_03_08\3237_RS_Bold\1\3237_',1:50,60);
-[relative_t_1,relative_1] = relative_analyze('D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\Suyash_05_10_2023_Rat_Surgery_03_08\3237_RS_Bold\1\3237_',51:500,baseline_rms,baseline_mean,540);
+[baseline_rms,baseline_mean] = baseline_analyze('D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\3237_RS_Bold\1\3237_',1:50,60);
+[relative_t_1,relative_1] = relative_analyze('D:\Data\Suyash_05_10_2023_Rat_Surgery_03_08\3237_RS_Bold\1\3237_',51:500,baseline_rms,baseline_mean,540);
 
 relative_b_resized = imresize(baseline_mean,[256 252]);
 relative_1_resized = imresize(relative_1,[256 252]);
@@ -28,7 +28,7 @@ function [baseline_rms, baseline_mean] = baseline_analyze(prefix,fnum,duration)
     parfor row = 1:size(D_baseline,1)
         baseline_row = reshape(double(D_baseline(row,:,:)),[size(D_baseline,2),size(D_baseline,3)]);
         
-        baseline_t(row,:,:) = lowpass(baseline_row,0.1,fs);
+        baseline_t(row,:,:) = baseline_row;
     end
     baseline_rms = rms(baseline_t,3);
     baseline_mean = mean(baseline_t,3);
@@ -57,7 +57,7 @@ function [relative_t,relative] = relative_analyze(prefix,fnum,baseline_rms,basel
     % fMRI Percentage Change
     parfor row = 1:size(D,1)
         sel_row = reshape(double(D(row,:,:)),[size(D,2),size(D,3)]);
-        relative_t(row,:,:) = highpass(sel_row,0.1,fs);
+        relative_t(row,:,:) = sel_row;
     end
 
     for t=1:size(D,3)

@@ -16,8 +16,8 @@ bar(categorical({'Experimental RMS Percent Change',...
 test_row = 42:44;
 test_col = 33:37;
 control_col = 27:31;
-[baseline,tSNR_baseline] = baseline_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_5_(4_10_23)\2023_04_12_Suyash_Rat_Surgery_4_10\2870_RS_Bold_2.7\1\2870_',1:50);
-[relative_412,relative,tSNR] = relative_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_5_(4_10_23)\2023_04_12_Suyash_Rat_Surgery_4_10\2870_RS_Bold_2.7\1\2870_',50:500,baseline);
+[baseline,tSNR_baseline] = baseline_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_5_(4_10_23)\2023_04_12_Suyash_Rat_Surgery_4_10\2870_RS_Bold_27\1\2870_',1:50);
+[relative_412,relative,tSNR] = relative_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_5_(4_10_23)\2023_04_12_Suyash_Rat_Surgery_4_10\2870_RS_Bold_27\1\2870_',50,500,baseline);
 imtool(relative)
 figure
 bar(categorical({'Experimental RMS Percent Change',...
@@ -27,7 +27,7 @@ test_row = 37:39;
 test_col = 32:36;
 control_col = 26:30;
 [baseline,tSNR_baseline] = baseline_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_3_(3_27_23)\2023_03_27_Suyash\2733_RS_Bold_2\1\2733_',1:50);
-[relative_327,relative,tSNR] = relative_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_3_(3_27_23)\2023_03_27_Suyash\2733_RS_Bold_2\1\2733_',50:500,baseline);
+[relative_327,relative,tSNR] = relative_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_3_(3_27_23)\2023_03_27_Suyash\2733_RS_Bold_2\1\2733_',50,500,baseline);
 imtool(relative)
 figure
 bar(categorical({'Experimental RMS Percent Change',...
@@ -37,7 +37,7 @@ test_row = 42:44;
 test_col = 34:38;
 control_col = 26:30;
 [baseline,tSNR_baseline] = baseline_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_4_(3_16_23)\2023_04_03_Suyash_Rat_Surgery_3_16\2762_RS_Bold_2\1\2762_',1:50);
-[relative_403,relative,tSNR] = relative_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_4_(3_16_23)\2023_04_03_Suyash_Rat_Surgery_3_16\2762_RS_Bold_2\1\2762_',50:500,baseline);
+[relative_403,relative,tSNR] = relative_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_4_(3_16_23)\2023_04_03_Suyash_Rat_Surgery_3_16\2762_RS_Bold_2\1\2762_',50,500,baseline);
 imtool(relative)
 figure
 bar(categorical({'Experimental RMS Percent Change',...
@@ -47,7 +47,7 @@ test_row = 40:43;
 test_col = 35:37;
 control_col = 29:31;
 [baseline,tSNR_baseline] = baseline_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_6_(4_18_23)\2023_04_26_Suyash_Rat_Surgery_04_18\3070_RS_Bold_Slice14\1\3070_',1:50);
-[relative_426,relative,tSNR] = relative_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_6_(4_18_23)\2023_04_26_Suyash_Rat_Surgery_04_18\3070_RS_Bold_Slice14\1\3070_',50:500,baseline);
+[relative_426,relative,tSNR] = relative_analyze('C:\Users\Suyash\Box\Suyash_MRI\Experimental_Group\Subj_6_(4_18_23)\2023_04_26_Suyash_Rat_Surgery_04_18\3070_RS_Bold_Slice14\1\3070_',50,500,baseline);
 imtool(relative)
 figure
 bar(categorical({'Experimental RMS Percent Change',...

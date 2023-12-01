@@ -1,0 +1,85 @@
+%start with clean slate (nobkpt)
+clear       %no variables
+close all   %no figures
+clc         %empty command window
+
+[baseline_rms,baseline_mean] = baseline_analyze('D:\Data\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\3162_RS_bold_slice14\1\3162_',1:50,60);
+[relative_b_1,relative_b] = relative_analyze('D:\Data\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\3162_RS_bold_slice14\1\3162_',1:500,baseline,600);
+
+baseline = baseline_analyze('D:\Data\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\3166_Bold_post_1\1\3166_',1:50,60);
+[relative_t_1,relative_1] = relative_analyze('D:\Data\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\3166_Bold_post_1\1\3166_',1:500,baseline,600);
+[relative_t_2,relative_2] = relative_analyze('D:\Data\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\3167_Bold_post_2\1\3167_',1:500,baseline,600);
+[relative_t_3,relative_3] = relative_analyze('D:\Data\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\3168_Bold_post_3\1\3168_',1:500,baseline,600);
+[relative_t_4,relative_4] = relative_analyze('D:\Data\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\3169_Bold_post_4\1\3169_',1:500,baseline,600);
+[relative_t_5,relative_5] = relative_analyze('D:\Data\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\3170_Bold_post_5\1\3170_',1:500,baseline,600);
+[relative_t_6,relative_6] = relative_analyze('D:\Data\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\2023_05_02_Suyash_Rat_Surgery_03_08_4ap\3173_Bold_post_6\1\3173_',1:500,baseline,600);
+
+relative_b_resized = imresize(relative_b,[256 252]);
+relative_1_resized = imresize(relative_1,[256 252]);
+relative_2_resized = imresize(relative_2,[256 252]);
+relative_3_resized = imresize(relative_3,[256 252]);
+relative_4_resized = imresize(relative_4,[256 252]);
+relative_5_resized = imresize(relative_5,[256 252]);
+relative_6_resized = imresize(relative_6,[256 252]);
+
+function [baseline_rms, baseline_mean] = baseline_analyze(prefix,fnum,duration)
+
+    fs = double(length(fnum))/duration;
+    ext='.dcm';
+
+    fname_baseline = [prefix sprintf('%05d',fnum(1)) ext];
+    baseline_info = dicominfo(fname_baseline);
+    voxel_size = [baseline_info.PixelSpacing; baseline_info.SliceThickness]';
+    
+    hWaitBar = waitbar(0,'Reading DICOM files');
+    for i=length(fnum):-1:1
+        fname_baseline = [prefix sprintf('%05d',fnum(i)) ext];
+        D_baseline(:,:,i) = uint16(dicomread(fname_baseline));
+        waitbar((length(fnum)-i)/length(fnum))
+    end
+    delete(hWaitBar)
+
+    % -------------------------------------------------------------------------
+    % fMRI Percentage Change
+    
+    % Baseline
+    parfor row = 1:size(D_baseline,1)
+        baseline_row = reshape(double(D_baseline(row,:,:)),[size(D_baseline,2),size(D_baseline,3)]);
+        
+        baseline_t(row,:,:) = lowpass(baseline_row,0.1,fs);
+    end
+    baseline_rms = rms(baseline_t,3);
+    baseline_mean = mean(baseline_t,3);
+end
+
+function [relative_t,relative] = relative_analyze(prefix,fnum,baseline_rms,baseline_mean,duration)
+
+    fs = double(length(fnum)/duration);
+    %first filename in series (nobkpt)
+    ext = '.dcm';
+    fname = [prefix sprintf('%05d',fnum(1)) ext];
+    
+    %examine file header (nobkpt)
+    info = dicominfo(fname);
+    
+    %extract size info from metadata (nobkpt)
+    voxel_size = [info.PixelSpacing; info.SliceThickness]';
+    
+    %read slice images; populate XYZ matrix
+    for i=1:length(fnum)
+        fname = [prefix sprintf('%05d',fnum(i)) ext];
+        D(:,:,i) = uint16(dicomread(fname));
+    end
+
+    % -------------------------------------------------------------------------
+    % fMRI Percentage Change
+    parfor row = 1:size(D,1)
+        sel_row = reshape(double(D(row,:,:)),[size(D,2),size(D,3)]);
+        relative_t(row,:,:) = highpass(sel_row,0.1,fs);
+    end
+
+    for t=1:size(D,3)
+        relative_t(:,:,t) = relative_t(:,:,t)./baseline_rms;
+    end
+    relative = rms(relative_t,3);
+end

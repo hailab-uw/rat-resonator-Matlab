@@ -1,19 +1,17 @@
-phase_4 = analyze('D:\Data\2023_06_14_Suyash_Phantom\2023_06_14_Suyash_Phantom\3651_B0map_te1\2\3651_',...
-    'D:\Data\2023_06_14_Suyash_Phantom\2023_06_14_Suyash_Phantom\3651_B0map_te1\3\3651_',1:64);
+phase_4 = analyze('D:\Data\2023_05_15_Suyash_rat_surgery_05_10_23\2023_05_15_Suyash_rat_surgery_05_10_23\3308_B0map_TE1\2\3308_',...
+    'D:\Data\2023_05_15_Suyash_rat_surgery_05_10_23\2023_05_15_Suyash_rat_surgery_05_10_23\3308_B0map_TE1\3\3308_',1:64);
 
-phase_5 = analyze('D:\Data\2023_06_14_Suyash_Phantom\2023_06_14_Suyash_Phantom\3652_B0map_te2\2\3652_',...
-    'D:\Data\2023_06_14_Suyash_Phantom\2023_06_14_Suyash_Phantom\3652_B0map_te2\3\3652_',1:64);
+phase_5 = analyze('D:\Data\2023_05_15_Suyash_rat_surgery_05_10_23\2023_05_15_Suyash_rat_surgery_05_10_23\3309_B0map_TE2\2\3309_',...
+    'D:\Data\2023_05_15_Suyash_rat_surgery_05_10_23\2023_05_15_Suyash_rat_surgery_05_10_23\3309_B0map_TE2\3\3309_',1:64);
 
-phase_6 = analyze('D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3578_B0map_te3\2\3578_',...
-    'D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3578_B0map_te3\3\3578_',1:64);
+phase_6 = analyze('D:\Data\2023_05_15_Suyash_rat_surgery_05_10_23\2023_05_15_Suyash_rat_surgery_05_10_23\3310_B0map_TE3\2\3310_',...
+    'D:\Data\2023_05_15_Suyash_rat_surgery_05_10_23\2023_05_15_Suyash_rat_surgery_05_10_23\3310_B0map_TE3\3\3310_',1:64);
 
 map = phase_5-phase_4;
-map_img_1 = reshape(map(82,:,:),[64 64]);
-map_img_2 = reshape(map(42,:,:),[64 64]);
-
+map_img = reshape(map(71,:,:),[64 64]);
 
 other_map = phase_6-phase_5;
-other_map_img = reshape(map(70,:,:),[64 64]);
+other_map_img = reshape(map(71,:,:),[64 64]);
 
 function phase_mat = analyze(real_prefix,imaginary_prefix,fnum)
 
