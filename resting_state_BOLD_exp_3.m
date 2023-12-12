@@ -1,5 +1,5 @@
-threshold = 0.01;
-color_thresh = [-.08 .08];
+threshold = 0.005;
+color_thresh = [-.04 .04];
 sel_voxels_row = 66:72;
 sel_voxels_col = 125:132;
 
@@ -40,22 +40,26 @@ for idy= 1:length(sel_voxels_row)
         plot(squeeze(time_smoothed_relative_t(sel_voxels_row(idy),...
             sel_voxels_col(idx),:)))
         ylim([-.1 .1])
-        xlim([160 220])
+        xlim([80 120])
     end
 end
 
 [matched_smoothed_1,alpha_1] = mask_threshold(BOLD_masked,...
-    time_smoothed_relative_t(:,:,182),threshold,color_thresh);
+    time_smoothed_relative_t(:,:,100),threshold,color_thresh);
 [matched_smoothed_2,alpha_2] = mask_threshold(BOLD_masked,...
-    time_smoothed_relative_t(:,:,186),threshold,color_thresh);
+    time_smoothed_relative_t(:,:,102),threshold,color_thresh);
 [matched_smoothed_3,alpha_3] = mask_threshold(BOLD_masked,...
-    time_smoothed_relative_t(:,:,190),threshold,color_thresh);
+    time_smoothed_relative_t(:,:,104),threshold,color_thresh);
 [matched_smoothed_4,alpha_4] = mask_threshold(BOLD_masked,...
-    time_smoothed_relative_t(:,:,192),threshold,color_thresh);
+    time_smoothed_relative_t(:,:,108),threshold,color_thresh);
 [matched_smoothed_5,alpha_5] = mask_threshold(BOLD_masked,...
-    time_smoothed_relative_t(:,:,196),threshold,color_thresh);
+    time_smoothed_relative_t(:,:,111),threshold,color_thresh);
 [matched_smoothed_6,alpha_6] = mask_threshold(BOLD_masked,...
-    time_smoothed_relative_t(:,:,199),threshold,color_thresh);
+    time_smoothed_relative_t(:,:,114),threshold,color_thresh);
+[matched_smoothed_7,alpha_7] = mask_threshold(BOLD_masked,...
+    time_smoothed_relative_t(:,:,119),threshold,color_thresh);
+[matched_smoothed_8,alpha_8] = mask_threshold(BOLD_masked,...
+    time_smoothed_relative_t(:,:,121),threshold,color_thresh);
 
 show_overlay(matched_smoothed_1,brain_masked,alpha_1,color_thresh);
 show_overlay(matched_smoothed_2,brain_masked,alpha_2,color_thresh);
@@ -63,6 +67,8 @@ show_overlay(matched_smoothed_3,brain_masked,alpha_3,color_thresh);
 show_overlay(matched_smoothed_4,brain_masked,alpha_4,color_thresh);
 show_overlay(matched_smoothed_5,brain_masked,alpha_5,color_thresh);
 show_overlay(matched_smoothed_6,brain_masked,alpha_6,color_thresh);
+show_overlay(matched_smoothed_7,brain_masked,alpha_7,color_thresh);
+show_overlay(matched_smoothed_8,brain_masked,alpha_8,color_thresh);
 
 function show_overlay(masked_relative,anatomical,alpha_map,color_thresh)
     figure
@@ -71,15 +77,15 @@ function show_overlay(masked_relative,anatomical,alpha_map,color_thresh)
     ax2 = axes;
     roi = imagesc(masked_relative);
     linkaxes([ax1,ax2]);
-    ax1.Visible = 'off';
+    %ax1.Visible = 'off';
     ax2.Visible = 'off';
     ax2.XTick = [];
     ax2.YTick = [];
     colormap(ax1,'gray');
     colormap(ax2,'jet');
     set(ax2,'color','none','visible','off');
-    xlim(ax2,[75 165])
-    ylim(ax2,[62 125])
+    xlim(ax2,[120 145])
+    ylim(ax2,[62 76])
     alpha(roi,alpha_map);
     clim(ax2,color_thresh)
 end
@@ -97,5 +103,5 @@ function [matched_relative,alpha_map] = mask_threshold(maskedImage,...
             end
         end
     end
-    alpha_map = mat2gray(abs(matched_relative),[.02 .05]);
+    alpha_map = mat2gray(abs(matched_relative),[.005 .03]);
 end 

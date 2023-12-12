@@ -110,5 +110,5 @@ function [matched_relative,alpha_map] = mask_BOLD(maskedImage,relative,threshold
             end
         end
     end
-    alpha_map = mat2gray(matched_relative);
+    alpha_map = mat2gray(abs(matched_relative),[.02 .05]);
 end

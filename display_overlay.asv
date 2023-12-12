@@ -1,0 +1,22 @@
+mod_alpha = alpha;
+
+
+for row = 1:size(maskedImage,1)
+    for col = 1:size(maskedImage,2)
+        alpha_registered(row,col) = maskedImage(row,col) > 0 && registered(row,col) > 0.2;
+        if(col < 120 || col > 140)
+            alpha_registered(row,col) = 0;
+        end
+    end
+end
+
+figure;
+ax1 = axes;
+imagesc(maskedImage);
+colormap(ax1,'gray');
+ax2 = axes;
+imagesc(ax2,registered,'alphadata',alpha_registered);
+colormap(ax2,'jet');
+ax2.Visible = 'off';
+linkprop([ax1 ax2],'Position');
+clim([0 0.8])

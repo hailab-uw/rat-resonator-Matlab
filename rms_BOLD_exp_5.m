@@ -3,26 +3,26 @@ color_thresh = [.05 .35];
 sel_voxels_row = 67:68;
 sel_voxels_col = 142:145;
 
-% [matched_relative_1,alpha_1] = mask_BOLD(brain_masked,relative_1_t,threshold);
-% [matched_relative_2,alpha_2] = mask_BOLD(brain_masked,relative_2_t,threshold);
-% [matched_relative_3,alpha_3] = mask_BOLD(brain_masked,relative_3_t,threshold);
-% [matched_relative_4,alpha_4] = mask_BOLD(brain_masked,relative_4_t,threshold);
-% [matched_relative_5,alpha_5] = mask_BOLD(brain_masked,relative_5_t,threshold);
-% [matched_relative_6,alpha_6] = mask_BOLD(brain_masked,relative_6_t,threshold);
-% 
-% show_overlay(matched_relative_1,brain_masked,alpha_1,color_thresh);
-% show_overlay(matched_relative_2,brain_masked,alpha_2,color_thresh);
-% show_overlay(matched_relative_3,brain_masked,alpha_3,color_thresh);
-% show_overlay(matched_relative_4,brain_masked,alpha_4,color_thresh);
-% show_overlay(matched_relative_5,brain_masked,alpha_5,color_thresh);
-% show_overlay(matched_relative_6,brain_masked,alpha_6,color_thresh);
-% 
-% avg_voxels_exp(5,1) = mean(matched_relative_1(sel_voxels_row,sel_voxels_col),"all");
-% avg_voxels_exp(5,2) = mean(matched_relative_2(sel_voxels_row,sel_voxels_col),"all");
-% avg_voxels_exp(5,3) = mean(matched_relative_3(sel_voxels_row,sel_voxels_col),"all");
-% avg_voxels_exp(5,4) = mean(matched_relative_4(sel_voxels_row,sel_voxels_col),"all");
-% avg_voxels_exp(5,5) = mean(matched_relative_5(sel_voxels_row,sel_voxels_col),"all");
-% avg_voxels_exp(5,6) = mean(matched_relative_6(sel_voxels_row,sel_voxels_col),"all");
+[matched_relative_1,alpha_1] = mask_BOLD(brain_masked,relative_1_t,threshold);
+[matched_relative_2,alpha_2] = mask_BOLD(brain_masked,relative_2_t,threshold);
+[matched_relative_3,alpha_3] = mask_BOLD(brain_masked,relative_3_t,threshold);
+[matched_relative_4,alpha_4] = mask_BOLD(brain_masked,relative_4_t,threshold);
+[matched_relative_5,alpha_5] = mask_BOLD(brain_masked,relative_5_t,threshold);
+[matched_relative_6,alpha_6] = mask_BOLD(brain_masked,relative_6_t,threshold);
+
+show_overlay(matched_relative_1,brain_masked,alpha_1,color_thresh);
+show_overlay(matched_relative_2,brain_masked,alpha_2,color_thresh);
+show_overlay(matched_relative_3,brain_masked,alpha_3,color_thresh);
+show_overlay(matched_relative_4,brain_masked,alpha_4,color_thresh);
+show_overlay(matched_relative_5,brain_masked,alpha_5,color_thresh);
+show_overlay(matched_relative_6,brain_masked,alpha_6,color_thresh);
+
+avg_voxels_exp(5,1) = mean(matched_relative_1(sel_voxels_row,sel_voxels_col),"all");
+avg_voxels_exp(5,2) = mean(matched_relative_2(sel_voxels_row,sel_voxels_col),"all");
+avg_voxels_exp(5,3) = mean(matched_relative_3(sel_voxels_row,sel_voxels_col),"all");
+avg_voxels_exp(5,4) = mean(matched_relative_4(sel_voxels_row,sel_voxels_col),"all");
+avg_voxels_exp(5,5) = mean(matched_relative_5(sel_voxels_row,sel_voxels_col),"all");
+avg_voxels_exp(5,6) = mean(matched_relative_6(sel_voxels_row,sel_voxels_col),"all");
 
 relative_t = cat(3,relative_1_t,relative_2_t,relative_3_t,...
     relative_4_t,relative_5_t,relative_6_t);

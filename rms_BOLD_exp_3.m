@@ -1,7 +1,7 @@
 threshold = .05;
 color_thresh = [.05 .35];
 sel_voxels_row = 68:70;
-sel_voxels_col = 148:150;
+sel_voxels_col = 147:150;
 
 [matched_relative_1,alpha_1] = mask_BOLD(brain_masked,relative_1_t,threshold);
 [matched_relative_2,alpha_2] = mask_BOLD(brain_masked,relative_2_t,threshold);
