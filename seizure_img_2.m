@@ -1,10 +1,12 @@
-[baseline,tSNR_baseline] = baseline_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3738_Bold_post1\1\3738_',11:86);
-[relative_1_t,relative_1,tSNR_1] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3738_Bold_post1\1\3738_',11,500,baseline);
-[relative_2_t,relative_2,tSNR_2] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3739_Bold_post2\1\3739_',11,500,baseline);
-[relative_3_t,relative_3,tSNR_3] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3740_Bold_post3\1\3740_',11,500,baseline);
-[relative_4_t,relative_4,tSNR_4] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3741_Bold_post4\1\3741_',11,500,baseline);
-[relative_5_t,relative_5,tSNR_5] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3742_Bold_post5\1\3742_',11,500,baseline);
-[relative_6_t,relative_6,tSNR_6] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3743_Bold_post6\1\3743_',11,500,baseline);
+rho = 0.5;
+
+[baseline,tSNR_baseline] = baseline_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3738_Bold_post1\1\3738_',11:86,rho);
+[relative_1_t,relative_1,tSNR_1] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3738_Bold_post1\1\3738_',11,500,baseline,rho);
+[relative_2_t,relative_2,tSNR_2] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3739_Bold_post2\1\3739_',11,500,baseline,rho);
+[relative_3_t,relative_3,tSNR_3] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3740_Bold_post3\1\3740_',11,500,baseline,rho);
+[relative_4_t,relative_4,tSNR_4] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3741_Bold_post4\1\3741_',11,500,baseline,rho);
+[relative_5_t,relative_5,tSNR_5] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3742_Bold_post5\1\3742_',11,500,baseline,rho);
+[relative_6_t,relative_6,tSNR_6] = relative_analyze('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3743_Bold_post6\1\3743_',11,500,baseline,rho);
 
 t2_slice = get_t2('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3749_T2post\1\3749_',15);
 
@@ -15,14 +17,14 @@ function t2_slice = get_t2(prefix,num)
     t2_slice = uint16(dicomread(fname));
 end
 
-function [baseline,tSNR] = baseline_analyze(prefix,fnum)
+function [baseline,tSNR] = baseline_analyze(prefix,fnum,rho)
 
     ext='.dcm';
 
     d = designfilt('lowpassfir', ...        % Response type
        'FilterOrder',25, ...            % Filter order
-       'StopbandFrequency',.16, ...     % Frequency constraints
-       'PassbandFrequency',.15, ...
+       'StopbandFrequency',.03, ...     % Frequency constraints
+       'PassbandFrequency',.01, ...
        'DesignMethod','ls', ...         % Design method
        'SampleRate',.5/.6);               % Sample rate
 
@@ -35,6 +37,7 @@ function [baseline,tSNR] = baseline_analyze(prefix,fnum)
         fname_baseline = [prefix sprintf('%05d',fnum(i)) ext];
         D_baseline(:,:,i) = uint16(dicomread(fname_baseline));
         waitbar((length(fnum)-i)/length(fnum))
+        D_baseline(:,:,i) = imgaussfilt(D_baseline(:,:,i),rho);
     end
     delete(hWaitBar)
 
@@ -58,7 +61,7 @@ function [baseline,tSNR] = baseline_analyze(prefix,fnum)
     tSNR = baseline./std_baseline;
 end
 
-function [relative_t,relative,tSNR] = relative_analyze(prefix,start_slice,end_slice,baseline)
+function [relative_t,relative,tSNR] = relative_analyze(prefix,start_slice,end_slice,baseline,rho)
     %first filename in series (nobkpt)
     ext = '.dcm';
     fname = [prefix sprintf('%05d',start_slice) ext];
@@ -73,16 +76,17 @@ function [relative_t,relative,tSNR] = relative_analyze(prefix,start_slice,end_sl
     for i=end_slice:-1:start_slice
         fname = [prefix sprintf('%05d',i) ext];
         D(:,:,i-start_slice+1) = uint16(dicomread(fname));
+        D(:,:,i-start_slice+1) = imgaussfilt(D(:,:,i-start_slice+1),rho);
     end
 
     d = designfilt('bandpassfir', ...        % Response type
        'FilterOrder',25, ...            % Filter order
-       'StopbandFrequency1',.02, ...     % Frequency constraints
+       'StopbandFrequency1',.01, ...     % Frequency constraints
        'PassbandFrequency1',.03, ...
-       'StopbandFrequency2',.16,...
-       'PassbandFrequency2',.15, ...
+       'StopbandFrequency2',.11,...
+       'PassbandFrequency2',.1, ...
        'DesignMethod','ls', ...         % Design method
-       'SampleRate',.5/.6);               % Sample rate
+       'SampleRate',.5/.6);             % Sample rate
 
     % -------------------------------------------------------------------------
     % fMRI Percentage Change

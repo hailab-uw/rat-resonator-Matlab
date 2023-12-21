@@ -1,4 +1,4 @@
-rho = 1.8;
+rho = 1.5;
 
 [baseline,tSNR_baseline] = baseline_analyze('D:\Data\2023_05_15_Suyash_rat_surgery_05_10_23\3299_RS_bold_slice14\1\3299_',1:500,rho);
 [relative_1_t,relative_1,tSNR_1] = relative_analyze('D:\Data\2023_05_15_Suyash_rat_surgery_05_10_23\3299_RS_bold_slice14\1\3299_',11,100,baseline,rho);

@@ -1,10 +1,10 @@
-[baseline,tSNR_baseline] = baseline_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3781_Bold_1\1\3781_',11:86);
-[relative_1_t,relative_1,tSNR_1] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3781_Bold_1\1\3781_',11,500,baseline);
-[relative_2_t,relative_2,tSNR_2] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3782_Bold_2\1\3782_',11,500,baseline);
-[relative_3_t,relative_3,tSNR_3] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3783_Bold_3\1\3783_',11,500,baseline);
-[relative_4_t,relative_4,tSNR_4] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3784_Bold_4\1\3784_',11,500,baseline);
-[relative_5_t,relative_5,tSNR_5] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3785_Bold_5\1\3785_',11,500,baseline);
-[relative_6_t,relative_6,tSNR_6] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3786_Bold_6\1\3786_',11,500,baseline);
+[baseline,tSNR_baseline] = baseline_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3781_Bold_1\1\3781_',1:80);
+[relative_1_t,relative_1,tSNR_1] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3781_Bold_1\1\3781_',1,500,baseline);
+[relative_2_t,relative_2,tSNR_2] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3782_Bold_2\1\3782_',1,500,baseline);
+[relative_3_t,relative_3,tSNR_3] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3783_Bold_3\1\3783_',1,500,baseline);
+[relative_4_t,relative_4,tSNR_4] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3784_Bold_4\1\3784_',1,500,baseline);
+[relative_5_t,relative_5,tSNR_5] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3785_Bold_5\1\3785_',1,500,baseline);
+[relative_6_t,relative_6,tSNR_6] = relative_analyze('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3786_Bold_6\1\3786_',1,500,baseline);
 
 t2_slice = get_t2('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3789_post_T2\1\3789_',13);
 
@@ -21,8 +21,8 @@ function [baseline,tSNR] = baseline_analyze(prefix,fnum)
 
     d = designfilt('lowpassfir', ...        % Response type
        'FilterOrder',25, ...            % Filter order
-       'StopbandFrequency',.12, ...     % Frequency constraints
-       'PassbandFrequency',.1, ...
+       'StopbandFrequency',.02, ...     % Frequency constraints
+       'PassbandFrequency',.01, ...
        'DesignMethod','ls', ...         % Design method
        'SampleRate',.5/.6);               % Sample rate
 

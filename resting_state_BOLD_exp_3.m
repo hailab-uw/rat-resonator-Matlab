@@ -1,7 +1,7 @@
 threshold = 0.005;
 color_thresh = [-.04 .04];
-sel_voxels_row = 66:72;
-sel_voxels_col = 125:132;
+sel_voxels_row = 66:73;
+sel_voxels_col = 125:139;
 
 % [matched_relative_1,alpha_1] = mask_BOLD(brain_masked,relative_1_t,threshold);
 % [matched_relative_2,alpha_2] = mask_BOLD(brain_masked,relative_2_t,threshold);
@@ -30,17 +30,20 @@ time_smoothed_relative_t = smoothdata(matched_relative_t,3,"lowess",20);
 figure
 smoothed_avg = squeeze(mean(time_smoothed_relative_t(sel_voxels_row,sel_voxels_col,:),[1 2]));
 plot(smoothed_avg)
-ylim([-.1 .1])
-xlim([160 220])
+ylim([-.05 .05])
+xlim([167 217])
 figure
-subplot(length(sel_voxels_row),length(sel_voxels_col),1)
+ax=axes;
+subplot(length(sel_voxels_row),length(sel_voxels_col),1,ax)
 for idy= 1:length(sel_voxels_row)
     for idx = 1:length(sel_voxels_col)
         subplot(length(sel_voxels_row),length(sel_voxels_col),idx+((idy-1)*length(sel_voxels_col)))
         plot(squeeze(time_smoothed_relative_t(sel_voxels_row(idy),...
             sel_voxels_col(idx),:)))
+        axis off
         ylim([-.1 .1])
-        xlim([80 120])
+        xlim([167 217])
+        
     end
 end
 
@@ -77,7 +80,7 @@ function show_overlay(masked_relative,anatomical,alpha_map,color_thresh)
     ax2 = axes;
     roi = imagesc(masked_relative);
     linkaxes([ax1,ax2]);
-    %ax1.Visible = 'off';
+    % ax1.Visible = 'off';
     ax2.Visible = 'off';
     ax2.XTick = [];
     ax2.YTick = [];
@@ -85,7 +88,7 @@ function show_overlay(masked_relative,anatomical,alpha_map,color_thresh)
     colormap(ax2,'jet');
     set(ax2,'color','none','visible','off');
     xlim(ax2,[120 145])
-    ylim(ax2,[62 76])
+    ylim(ax2,[64 76])
     alpha(roi,alpha_map);
     clim(ax2,color_thresh)
 end

@@ -1,5 +1,5 @@
-threshold = .1;
-color_thresh = [.1 .35];
+threshold = .03;
+color_thresh = [.01 .06];
 sel_voxels_row = 68:70;
 sel_voxels_col = 116:119;
 
