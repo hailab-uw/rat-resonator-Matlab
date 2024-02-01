@@ -16,7 +16,7 @@ function t2_slice = get_t2(prefix,num)
     t2_slice = uint16(dicomread(fname));
 end
 
-function [baseline,tSNR] = baseline_analyze(prefix,fnum,rho)
+function [baseline,tSNR] = baseline_analyze(prefix,fnum,rho)imtool()
 
     ext='.dcm';
 

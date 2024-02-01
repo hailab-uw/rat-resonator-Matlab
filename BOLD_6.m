@@ -13,22 +13,31 @@ BOLD_t(:,:,2001:2500) = load_BOLD('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_i
 BOLD_t(:,:,2501:3000) = load_BOLD('D:\Data\06_29_2023_Suyash_rat_surgery_04_18_injection\Suyash_rat_surgery_04_18_injection\3786_Bold_6\1\3786_',1:500);
 
 baseline_t_resized = imresize(baseline_t,[size_rows size_cols]);
-ion_t_resized = imresize(BOLD_t,[size_rows size_cols]);
+BOLD_t_resized = imresize(BOLD_t,[size_rows size_cols]);
 
-ion_filt = designfilt('lowpassfir', ...        % Response type
+baseline_filt = designfilt('lowpassfir', ...        % Response type
    'FilterOrder',25, ...            % Filter order
-   'StopbandFrequency',.02, ...     % Frequency constraints
+   'StopbandFrequency',.03, ...     % Frequency constraints
    'PassbandFrequency',.01, ...
    'DesignMethod','ls', ...         % Design method
    'SampleRate',.5/.6);               % Sample rate
 
+BOLD_filt = designfilt('bandpassfir', ...        % Response type
+       'FilterOrder',25, ...            % Filter order
+       'StopbandFrequency1',.01, ...     % Frequency constraints
+       'PassbandFrequency1',.03, ...
+       'StopbandFrequency2',.15,...
+       'PassbandFrequency2',.14, ...
+       'DesignMethod','ls', ...         % Design method
+       'SampleRate',.5/.6);             % Sample rate
+
 for x = 1:size_cols
     for y=1:size_rows
         sel_vec = squeeze(baseline_t_resized(y,x,:));
-        pixel_filtered = filtfilt(ion_filt,double(sel_vec));
+        pixel_filtered = filtfilt(baseline_filt,double(sel_vec));
         baseline_t_filtered(y,x,:) = pixel_filtered;
-        sel_vec = squeeze(ion_t_resized(y,x,:));
-        pixel_filtered = filtfilt(ion_filt,double(sel_vec));
-        ion_t_filtered(y,x,:) = pixel_filtered;
+        sel_vec = squeeze(BOLD_t_resized(y,x,:));
+        pixel_filtered = filtfilt(BOLD_filt,double(sel_vec));
+        BOLD_t_filtered(y,x,:) = pixel_filtered;
     end
 end

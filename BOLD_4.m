@@ -1,16 +1,16 @@
 addpath("GitHub\rat-resonator-Matlab\src\");
 
-t2_slice = get_t2('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3749_T2post\1\3749_',15);
+t2_slice = get_t2('D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3589_T2post_stoppedearly\1\3589_',13);
 size_cols = size(t2_slice,2);
 size_rows = size(t2_slice,1);
 
-baseline_t = load_BOLD('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3738_Bold_post1\1\3738_',11:86);
-BOLD_t(:,:,1:500) = load_BOLD('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3738_Bold_post1\1\3738_',1:500);
-BOLD_t(:,:,501:1000) = load_BOLD('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3739_Bold_post2\1\3739_',1:500);
-BOLD_t(:,:,1001:1500) = load_BOLD('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3740_Bold_post3\1\3740_',1:500);
-BOLD_t(:,:,1501:2000) = load_BOLD('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3741_Bold_post4\1\3741_',1:500);
-BOLD_t(:,:,2001:2500) = load_BOLD('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3742_Bold_post5\1\3742_',1:500);
-BOLD_t(:,:,2501:3000) = load_BOLD('D:\Data\2023_06_21_Suyash_Rat_surg_4_10_injections\2023_06_21_Suyash_Rat_surg_4_10_injections\3743_Bold_post6\1\3743_',1:500);
+baseline_t = load_BOLD('D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3583_bold1\1\3583_',11:86);
+BOLD_t(:,:,1:500) = load_BOLD('D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3583_bold1\1\3583_',1:500);
+BOLD_t(:,:,501:1000) = load_BOLD('D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3584_bold2\1\3584_',1:500);
+BOLD_t(:,:,1001:1500) = load_BOLD('D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3585_bold3\1\3585_',1:500);
+BOLD_t(:,:,1501:2000) = load_BOLD('D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3586_bold4\1\3586_',1:500);
+BOLD_t(:,:,2001:2500) = load_BOLD('D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3587_bold5\1\3587_',1:500);
+BOLD_t(:,:,2501:3000) = load_BOLD('D:\Data\2023_05_31_Suyash_rat_surgery_5_10\2023_05_31_Suyash_rat_surgery_5_10\3588_bold6\1\3588_',1:500);
 
 baseline_t_resized = imresize(baseline_t,[size_rows size_cols]);
 BOLD_t_resized = imresize(BOLD_t,[size_rows size_cols]);
