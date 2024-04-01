@@ -25,3 +25,28 @@ for i=1:6
     BOLD_relative_rms(:,:,i) = rms(BOLD_t_relative(:,:,((i-1)*500+1):i*500),3);
     BOLD_timesmoothed_rms(:,:,i) = rms(BOLD_t_timesmoothed(:,:,((i-1)*500+1):i*500),3);
 end
+
+for t = 1
+    for row = 1:size(BOLD_mask,1)
+        for col = 1:size(BOLD_mask,2)
+            alpha_registered(row,col,t) = (BOLD_timesmoothed_rms(row,col,t) >.02)*.3;
+        end
+    end
+end
+
+for t=1:6
+    make_overlay(BOLD_relative_rms(:,:,t),alpha_registered(:,:,t),anatomical);
+end
+
+function make_overlay(BOLD_rms,alpha_registered_t,anatomical)
+    figure;
+    ax1 = axes;
+    imagesc(anatomical);
+    colormap(ax1,'gray');
+    ax2 = axes;
+    imagesc(ax2,BOLD_rms,'alphadata',alpha_registered_t);
+    colormap(ax2,'jet');
+    ax2.Visible = 'off';
+    % clim([0.02 .07])
+    linkprop([ax1 ax2],'Position');
+end

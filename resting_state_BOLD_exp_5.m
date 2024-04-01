@@ -1,5 +1,5 @@
 threshold = 0.0125;
-color_thresh = [0 .05];
+color_thresh = [0 .03];
 sel_voxels_row = 67:68;
 sel_voxels_col = 135:136;
 
@@ -49,9 +49,9 @@ for idy= 1:length(sel_voxels_row)
 end
 
 [matched_smoothed_1,alpha_1] = mask_threshold(brain_masked,...
-    time_smoothed_relative_t(:,:,276),threshold);
+    time_smoothed_relative_t(:,:,276).*BW_mask,threshold);
 [matched_smoothed_2,alpha_2] = mask_threshold(brain_masked,...
-    time_smoothed_relative_t(:,:,285),threshold);
+    time_smoothed_relative_t(:,:,285).*BW_mask,threshold);
 [matched_smoothed_3,alpha_3] = mask_threshold(brain_masked,...
     time_smoothed_relative_t(:,:,293),threshold);
 [matched_smoothed_4,alpha_4] = mask_threshold(brain_masked,...
