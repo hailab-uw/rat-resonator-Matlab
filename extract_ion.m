@@ -23,15 +23,16 @@ for t = 1:6
     for row = 1:size(BOLD_mask,1)
         for col = 1:size(BOLD_mask,2)
             alpha_registered(row,col,t) = avg_ion_relative(row,col,t) < 0.75;
+            alpha_registered(row,col,t) = 1;
         end
     end
 end
 
-[avg_ion_tilted,alpha_tilted,anatomical_tilted] = ...
-    tilt(avg_ion_relative,alpha_registered,anatomical,7);
+% [avg_ion_tilted,alpha_tilted,anatomical_tilted] = ...
+%     tilt(avg_ion_relative,alpha_registered,anatomical,7);
 
 for t=1:6
-    make_overlay(avg_ion_tilted(:,:,t),alpha_tilted(:,:,t),anatomical_tilted);
+    make_overlay(avg_ion_relative(:,:,t),alpha_registered(:,:,t),anatomical);
 end
 
 function make_overlay(avg_ion_relative_t,alpha_registered_t,anatomical)
