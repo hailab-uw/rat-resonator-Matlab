@@ -33,3 +33,6 @@ for x = 1:size_cols
         ion_t_filtered(y,x,:) = pixel_filtered;
     end
 end
+
+ion_t_full = ion_t_filtered./mean(baseline_t_filtered,3);
+ion_t = squeeze(mean(ion_t_full(69:71,143:145,:),[1 2]));
