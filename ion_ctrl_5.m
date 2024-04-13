@@ -1,16 +1,16 @@
 addpath("GitHub\rat-resonator-Matlab\src\");
 
-t2_slice = get_t2('D:\Data\Control\2023_10_12_Suyash\2023_10_12_Suyash\1\4545_T2post\1\4545_',15);
+t2_slice = get_t2('D:\Data\Control\2023_10_25_Suyash\2023_10_25_Suyash\2\4920_T2_post\1\4920_',14);
 size_cols = size(t2_slice,2);
 size_rows = size(t2_slice,1);
 
-baseline_t = load_BOLD('D:\Data\Control\2023_10_12_Suyash\2023_10_12_Suyash\1\4539_bold1\1\4539_',11:86);
-BOLD_t(:,:,1:500) = load_BOLD('D:\Data\Control\2023_10_12_Suyash\2023_10_12_Suyash\1\4539_bold1\1\4539_',1:500);
-BOLD_t(:,:,501:1000) = load_BOLD('D:\Data\Control\2023_10_12_Suyash\2023_10_12_Suyash\1\4540_bold2\1\4540_',1:500);
-BOLD_t(:,:,1001:1500) = load_BOLD('D:\Data\Control\2023_10_12_Suyash\2023_10_12_Suyash\1\4541_bold3\1\4541_',1:500);
-BOLD_t(:,:,1501:2000) = load_BOLD('D:\Data\Control\2023_10_12_Suyash\2023_10_12_Suyash\1\4542_bold4\1\4542_',1:500);
-BOLD_t(:,:,2001:2500) = load_BOLD('D:\Data\Control\2023_10_12_Suyash\2023_10_12_Suyash\1\4543_bold5\1\4543_',1:500);
-BOLD_t(:,:,2501:3000) = load_BOLD('D:\Data\Control\2023_10_12_Suyash\2023_10_12_Suyash\1\4544_bold6\1\4544_',1:500);
+baseline_t = load_BOLD('D:\Data\Control\2023_10_25_Suyash\2023_10_25_Suyash\2\4914_bold1\1\4914_',11:86);
+BOLD_t(:,:,1:500) = load_BOLD('D:\Data\Control\2023_10_25_Suyash\2023_10_25_Suyash\2\4914_bold1\1\4914_',1:500);
+BOLD_t(:,:,501:1000) = load_BOLD('D:\Data\Control\2023_10_25_Suyash\2023_10_25_Suyash\2\4915_bold2\1\4915_',1:500);
+BOLD_t(:,:,1001:1500) = load_BOLD('D:\Data\Control\2023_10_25_Suyash\2023_10_25_Suyash\2\4916_bold3\1\4916_',1:500);
+BOLD_t(:,:,1501:2000) = load_BOLD('D:\Data\Control\2023_10_25_Suyash\2023_10_25_Suyash\2\4917_bold4\1\4917_',1:500);
+BOLD_t(:,:,2001:2500) = load_BOLD('D:\Data\Control\2023_10_25_Suyash\2023_10_25_Suyash\2\4918_bold5\1\4918_',1:500);
+BOLD_t(:,:,2501:3000) = load_BOLD('D:\Data\Control\2023_10_25_Suyash\2023_10_25_Suyash\2\4919_bold6\1\4919_',1:500);
 
 baseline_t_resized = imresize(baseline_t,[size_rows size_cols]);
 ion_t_resized = imresize(BOLD_t,[size_rows size_cols]);
@@ -35,4 +35,4 @@ for x = 1:size_cols
 end
 
 ctrl_relative_t = ion_t_filtered./mean(baseline_t_filtered,3);
-ctrl_t(:,2) = squeeze(mean(ctrl_relative_t(58:60,134:136,:),[1 2]));
+ctrl_t(:,5) = squeeze(mean(ctrl_relative_t(64:66,147:149,:),[1 2]));

@@ -8,8 +8,6 @@
 
 t2_slice = get_t2('D:\Data\Control\2023_10_12_Suyash\2023_10_12_Suyash\1\4545_T2post\1\4545_',14);
 
-
-
 function t2_slice = get_t2(prefix,num)
     ext='.dcm';
 
