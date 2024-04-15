@@ -36,3 +36,6 @@ end
 
 ctrl_relative_t = ion_t_filtered./mean(baseline_t_filtered,3);
 ctrl_t(:,5) = squeeze(mean(ctrl_relative_t(64:66,147:149,:),[1 2]));
+for i=1:6
+    avg_ctrl(5,i) = mean(ctrl_t((i-1)*500+1:i*500,5));
+end

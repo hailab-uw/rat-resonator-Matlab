@@ -35,4 +35,7 @@ for x = 1:size_cols
 end
 
 ion_t_full = ion_t_filtered./mean(baseline_t_filtered,3);
-ion_t = squeeze(mean(ion_t_full(69:71,143:145,:),[1 2]));
+ion_t(:,1) = squeeze(mean(ion_t_full(69:71,143:145,:),[1 2]));
+for i=1:6
+    avg_ion(1,i) = mean(ion_t((i-1)*500+1:i*500,1));
+end
